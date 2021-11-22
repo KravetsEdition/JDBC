@@ -17,14 +17,14 @@ public class Main extends JFrame {
 
         ResultSet appUserResult = dbHandler.getInformationTable("""
                 SELECT id FROM app_user
-                """, dbHandler.dbName2);
+                """, dbHandler.dbConnection2);
 
         ResultSet studentResult = dbHandler.getInformationTable("""
                 SELECT student.id
-                FROM student_degree
-                JOIN student ON student.id = student_degree.student_id
-                WHERE student_degree.active = true
-                """, dbHandler.dbName1);
+                FROM student_degree st
+                JOIN student ON student.id = st.student_id
+                WHERE st.active = true
+                """, dbHandler.dbConnection1);
 
         while (appUserResult.next()) {
             userIds.add(appUserResult.getString(1));
@@ -70,7 +70,7 @@ public class Main extends JFrame {
             for (String s : idsSet)
                 deleteIds.append(s).append(",");
             deleteIds = new StringBuilder(deleteIds.substring(0, deleteIds.length() - 1)); // режем последний символ ","
-            dbHandler.deleteInformationTable("UPDATE app_user SET active = true WHERE id IN(" + deleteIds + ");", dbHandler.dbName2);
+            dbHandler.deleteInformationTable("UPDATE app_user SET active = false WHERE id IN(" + deleteIds + ");", dbHandler.dbConnection2);
         }
     }
 

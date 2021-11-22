@@ -1,8 +1,8 @@
 package com.company.DBConnect;
 
 public class ConnectConfig {
-    protected String dbHost = "localhost";
-    protected String dbPort = "5432";
-    protected String dbUser = "postgres";
-    protected String dbPass = "admin";
+    public static final String DB_HOST = "localhost";
+    public static final String DB_PORT = "5432";
+    public static final String DB_USER = "postgres";
+    public static final String DB_PASS = "admin";
 }
